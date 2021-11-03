@@ -31,7 +31,6 @@ public class Validaciones {
     //Método sobrecargado para el DNI y el teléfono, ya que no tienen una longitud entre X e Y, sino solo un número Z, cpn lo cual
     //solo necesitamos como parámetro la longitud exacta
     public static boolean esNumeroEnRango(String cadenaNumerica, int longitud) {
-        int numero = Integer.parseInt(cadenaNumerica);
         return (esEntero(cadenaNumerica) && cadenaNumerica.length()==longitud);
     }
 }

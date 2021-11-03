@@ -6,12 +6,11 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public class FileAccessCliente {
     private File ficheroClientes;
 
-    public static final String RUTA_FICHERO_CLIENTES= "fichero clientes.bin";
+    public static final String RUTA_FICHERO_CLIENTES= "clientes.bin";
 
     public FileAccessCliente() {
         this.ficheroClientes = new File(RUTA_FICHERO_CLIENTES);
