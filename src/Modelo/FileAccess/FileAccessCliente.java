@@ -29,7 +29,5 @@ public class FileAccessCliente {
         }
     }
 
-    public static int getNumeroClientes() {
-        return 0;
-    }
+
 }

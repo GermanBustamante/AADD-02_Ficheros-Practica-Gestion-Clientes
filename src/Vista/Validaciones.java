@@ -33,4 +33,9 @@ public class Validaciones {
     public static boolean esNumeroEnRango(String cadenaNumerica, int longitud) {
         return (esEntero(cadenaNumerica) && cadenaNumerica.length()==longitud);
     }
+
+    public static boolean validarMenuFormato(String eleccion) {
+        return eleccion.equals(Menu.US_ASCII) || eleccion.equals(Menu.ISO_8859_1) || eleccion.equals(Menu.UTF_8) ||
+                eleccion.equals(Menu.UTF_16LE) || eleccion.equals(Menu.UTF_16BE) || eleccion.equals(Menu.UTF_16);
+    }
 }

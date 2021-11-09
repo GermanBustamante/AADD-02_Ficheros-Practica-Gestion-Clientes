@@ -13,11 +13,27 @@ public class Menu {
             5. Exportar clientes.
             0. Salir.
             """;
+
+    public static final String MENU_FORMATO_FICHERO = """
+            1 -> US-ASCII
+            2 -> ISO-8859-1
+            3 -> UTF-8
+            4 -> UTF-16BE
+            5 -> UTF-16LE
+            6 -> UFT-16
+            """;
+
     public static final int MINIMA_ELECCION_MENU_PRINCIPAL = 0;
     public static final int MAXIMA_ELECCION_MENU_PRINCIPAL = 5;
     public static final int MINIMA_LONGITUD_CADENA = 1;
     public static final int LONGITUD_NUMEROS_DNI = 8;
     public static final int LONGITUD_TELEFONO = 9;
+    public static final String US_ASCII = "US-ASCII";
+    public static final String ISO_8859_1 = "ISO-8859-1";
+    public static final String UTF_8 = "UTF-8";
+    public static final String UTF_16BE = "UTF-16BE";
+    public static final String UTF_16LE = "UTF-16LE";
+    public static final String UTF_16 = "UTF-16";
 
     public static final String INGRESO_NOMBRE_CLIENTE = "Ingresa el nombre del cliente";
     public static final String INGRESO_APELLIDOS_CLIENTE = "Ingresa los apellidos del cliente";
@@ -75,4 +91,12 @@ public class Menu {
     }
 
 
+    public static String ingresarOpcionMenuFormato() {
+        String eleccion;
+        do {
+            System.out.println(MENU_FORMATO_FICHERO);
+            eleccion = teclado.nextLine();
+        } while (!Validaciones.validarMenuFormato(eleccion));
+        return eleccion;
+    }
 }

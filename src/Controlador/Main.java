@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Entidades.Cliente;
 import Modelo.FileAccess.FileAccessCliente;
+import Modelo.FileAccess.FileAccessFicheroConfig;
 import Modelo.FileAccess.FileAccessIndiceClientes;
 import Modelo.Utilidades.Utilidades;
 import Vista.Menu;
@@ -13,6 +14,7 @@ public class Main {
 
         FileAccessCliente fileAccessCliente = new FileAccessCliente();
         FileAccessIndiceClientes fileAccessIndiceClientes = new FileAccessIndiceClientes();
+        FileAccessFicheroConfig fileAccessFicheroConfig = new FileAccessFicheroConfig();
 
         do {
             eleccion = Menu.mostrarMenuPrincipalEingresarEntradaMenu();
@@ -38,15 +40,26 @@ public class Main {
     }
 
     private static void consultarCliente() {
+        /*
+        Busca en el fichero de indices el DNI del cliente,y si lo encuentra, devolverá un valor, dicho valor
+        lo tomará otro método con RamdomAccessFile saltará hasta el registro X y ahí tendrá el cliente
+        */
     }
 
     private static void borrarCliente() {
+        /*
+        * Setearemos la letra del DNI del ficheroClientes y ficheroIndices a "O" y cuando le de a actualizarDatos()
+        * creará un nuevo fichero con todos los datos menos los DNIs q tengan la O.
+        * NOTA: Atributo que recoja el número de cambios q se deben hacer TODO nose como lo haría
+        * */
     }
 
     private static void configurarExportacion() {
+        String formatoFichero = Menu.ingresarOpcionMenuFormato();
     }
 
     private static void exportarClientes() {
+
     }
 
 }
