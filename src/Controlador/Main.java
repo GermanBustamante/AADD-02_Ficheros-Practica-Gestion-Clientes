@@ -20,7 +20,7 @@ public class Main {
             eleccion = Menu.mostrarMenuPrincipalEingresarEntradaMenu();
             switch (eleccion) {
                 case 1 -> agregarNuevoCliente(fileAccessCliente);
-                case 2 -> consultarCliente();
+                case 2 -> consultarCliente(fileAccessIndiceClientes);
                 case 3 -> borrarCliente();
                 case 4 -> configurarExportacion();
                 case 5 -> exportarClientes();
@@ -39,7 +39,9 @@ public class Main {
         fileAccessCliente.agregarClienteFichero(cliente);
     }
 
-    private static void consultarCliente() {
+    private static void consultarCliente(FileAccessIndiceClientes fileAccessIndiceClientes) {
+        String DNICliente = Utilidades.getDNICliente(Menu.ingresarNumerosDNICliente());
+        int indiceCliente = fileAccessIndiceClientes.getIndiceCliente(DNICliente);
         /*
         Busca en el fichero de indices el DNI del cliente,y si lo encuentra, devolverá un valor, dicho valor
         lo tomará otro método con RamdomAccessFile saltará hasta el registro X y ahí tendrá el cliente
