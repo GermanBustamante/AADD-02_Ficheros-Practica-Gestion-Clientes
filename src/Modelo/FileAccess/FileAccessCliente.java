@@ -11,6 +11,11 @@ public class FileAccessCliente {
     private File ficheroClientes;
 
     public static final String RUTA_FICHERO_CLIENTES= "clientes.bin";
+    public static final int LONGITUD_NOMBRE_CLIENTE_BYTES= 25;
+    public static final int LONGITUD_APELLIDOS_CLIENTE_BYTES= 25;
+    public static final int LONGITUD_DNI_CLIENTE_BYTES= 9;
+    public static final int LONGITUD_TELEFONO_CLIENTE_BYTES= 9;
+    public static final int LONGITUD_DIRECCION_CLIENTE_BYTES= 30;
 
     public FileAccessCliente() {
         this.ficheroClientes = new File(RUTA_FICHERO_CLIENTES);
@@ -29,5 +34,12 @@ public class FileAccessCliente {
         }
     }
 
+    private int getLongitudBytesCliente (){
+        return LONGITUD_NOMBRE_CLIENTE_BYTES+LONGITUD_APELLIDOS_CLIENTE_BYTES+LONGITUD_DIRECCION_CLIENTE_BYTES+LONGITUD_DNI_CLIENTE_BYTES+LONGITUD_TELEFONO_CLIENTE_BYTES;
+    }
 
+
+    public Cliente getClienteDadoIndice() {
+        return null;
+    }
 }

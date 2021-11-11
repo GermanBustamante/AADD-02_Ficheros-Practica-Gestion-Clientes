@@ -54,4 +54,13 @@ public class Cliente {
         this.telefono = telefono;
         this.direccion = direccion;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre --> " + nombre +
+                "\tApellidos --> " + apellidos +
+                "\nDNI --> " + DNI +
+                "\tTelefono --> " + telefono +
+                "\nDireccion --> " + direccion;
+    }
 }

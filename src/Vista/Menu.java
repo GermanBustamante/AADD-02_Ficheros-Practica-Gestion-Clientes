@@ -1,5 +1,7 @@
 package Vista;
 
+import Modelo.Utilidades.Utilidades;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -23,9 +25,13 @@ public class Menu {
             6 -> UFT-16
             """;
 
+    public static final String MENSAJE_DNI_NO_ENCONTRADO = "No se ha encontrado ningún DNI";
     public static final int MINIMA_ELECCION_MENU_PRINCIPAL = 0;
     public static final int MAXIMA_ELECCION_MENU_PRINCIPAL = 5;
     public static final int MINIMA_LONGITUD_CADENA = 1;
+    public static final int LONGITUD_NOMBRE_CLIENTE = 25;
+    public static final int LONGITUD_APELLIDOS_CLIENTE = 25;
+    public static final int LONGITUD_DIRECCION_CLIENTE = 30;
     public static final int LONGITUD_NUMEROS_DNI = 8;
     public static final int LONGITUD_TELEFONO = 9;
     public static final String US_ASCII = "US-ASCII";
@@ -59,12 +65,12 @@ public class Menu {
 
     public static String ingresarNombreCliente() {
         System.out.println(INGRESO_NOMBRE_CLIENTE);
-        return String.format(FORMATO_NOMBRE, teclado.nextLine());
+        return Utilidades.formatearString(LONGITUD_NOMBRE_CLIENTE, FORMATO_NOMBRE,teclado.nextLine());
     }
 
     public static String ingresarApellidosCliente() {
         System.out.println(INGRESO_APELLIDOS_CLIENTE);
-        return String.format(FORMATO_APELLIDOS, teclado.nextLine());
+        return Utilidades.formatearString(LONGITUD_APELLIDOS_CLIENTE, FORMATO_APELLIDOS,teclado.nextLine());
     }
 
     public static int ingresarNumerosDNICliente() {
@@ -87,7 +93,7 @@ public class Menu {
 
     public static String ingresarDireccionCliente() {
         System.out.println(INGRESO_DIRECCION_CLIENTE);
-        return String.format(FORMATO_DIRECCION, teclado.nextLine());
+        return Utilidades.formatearString(LONGITUD_DIRECCION_CLIENTE, FORMATO_DIRECCION,teclado.nextLine());
     }
 
 
@@ -98,5 +104,9 @@ public class Menu {
             eleccion = teclado.nextLine();
         } while (!Validaciones.validarMenuFormato(eleccion));
         return eleccion;
+    }
+
+    public static void mostrarMensajeDNINoEncontrado() {
+        System.out.println(MENSAJE_DNI_NO_ENCONTRADO);
     }
 }
