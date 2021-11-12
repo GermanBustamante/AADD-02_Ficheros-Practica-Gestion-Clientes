@@ -24,6 +24,7 @@ public class Menu {
             4 -> UTF-16BE
             5 -> UTF-16LE
             6 -> UFT-16
+            NOTA: SI NO COINCIDE NINGUNO DE LOS DATOS, SE TOMARÁ POR DEFECTO UTF-8
             """;
 
     public static final String MENSAJE_DNI_NO_ENCONTRADO = "No se ha encontrado ningún DNI";
@@ -101,10 +102,11 @@ public class Menu {
 
     public static String ingresarOpcionMenuFormato() {
         String eleccion;
-        do {
             System.out.println(MENU_FORMATO_FICHERO);
             eleccion = teclado.nextLine();
-        } while (!Validaciones.validarMenuFormato(eleccion));
+            if (!Validaciones.validarMenuFormato(eleccion)){//Si no cumple ninguno de los formatos
+                eleccion = UTF_8;
+            }
         return eleccion;
     }
 

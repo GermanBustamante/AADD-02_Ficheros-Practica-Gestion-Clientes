@@ -25,9 +25,9 @@ public class Main {
             switch (eleccion) {
                 case 1 -> agregarNuevoCliente(fileAccessCliente, fileAccessIndiceClientes);
                 case 2 -> consultarCliente(fileAccessCliente,fileAccessIndiceClientes);
-                case 3 -> borrarCliente();
+                case 3 -> borrarCliente(fileAccessCliente, fileAccessIndiceClientes);
                 case 4 -> configurarExportacion(fileAccessExportacionClientes);
-                case 5 -> exportarClientes(fileAccessExportacionClientes);
+                case 5 -> exportarClientes(fileAccessExportacionClientes, fileAccessFicheroConfig);
                 case 0 -> salida = true;
             }
         } while (!salida);
@@ -56,20 +56,32 @@ public class Main {
             Menu.mostrarCliente(clienteEncontrado);
         }
     }
+//TODO MODURALIZAR PQ ES MUY PARECIDO AL DE ARRRIBA
+    private static void borrarCliente(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes) {
+        String DNICliente = Utilidades.getDNICliente(Menu.ingresarNumerosDNICliente());
+        int posicionClienteFicheroIndices = fileAccessIndiceClientes.getPosicionClienteFichero(DNICliente);
+        if (posicionClienteFicheroIndices==-1){
+            Menu.mostrarMensajeDNINoEncontrado();
+        }else if (posicionClienteFicheroIndices == 0){
+            Menu.motrarMensajeFicheroVacio();
+        }else {
+            fileAccessCliente.borrarClienteFicheroClientes(posicionClienteFicheroIndices);//TODO DUDA HACE FALTA TOCARLO EN EL DE CLIENTES?
+            fileAccessIndiceClientes.borrarClienteFicheroIndices(posicionClienteFicheroIndices);
+        }
 
-    private static void borrarCliente() {
         /*
          * Setearemos la letra del DNI del ficheroClientes y ficheroIndices a "O" y cuando le de a actualizarDatos()
          * creará un nuevo fichero con todos los datos menos los DNIs q tengan la O.
          * NOTA: Atributo que recoja el número de cambios q se deben hacer TODO nose como lo haría
          * */
     }
-
+    //TODO PONGO UN -1 EN EL FICHERO DE INDICES PARA QUE CUANDO LO LEA SIMPLEMENTE SUME EL CONTADOR Y NO LO CUENTE
     private static void configurarExportacion(FileAccessExportacionClientes fileAccessExportacionClientes) {
         fileAccessExportacionClientes.escribirFormatoExportacionFichero(Menu.ingresarOpcionMenuFormato());
     }
 
-    private static void exportarClientes(FileAccessExportacionClientes fileAccessExportacionClientes) {
+    private static void exportarClientes(FileAccessExportacionClientes fileAccessExportacionClientes, FileAccessFicheroConfig fileAccessFicheroConfig) {
+        fileAccessExportacionClientes.escribirFormatoExportacionFichero(fileAccessFicheroConfig.getFormatoFicheroConfiguracion());
 
     }
 

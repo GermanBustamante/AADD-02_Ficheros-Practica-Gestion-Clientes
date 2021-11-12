@@ -7,7 +7,8 @@ public class Utilidades {
     public static String getDNICliente(int numerosDNICliente) {
         char letra;
         letra = LETRASDNI[numerosDNICliente % 23];
-        return String.valueOf(numerosDNICliente).concat(String.valueOf(letra));
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append(String.valueOf(numerosDNICliente)).append(String.valueOf(letra)).toString();
     }
 
     public static String formatearString(int longitudCadena, String formatoCadena, String cadenaAFormatear) {

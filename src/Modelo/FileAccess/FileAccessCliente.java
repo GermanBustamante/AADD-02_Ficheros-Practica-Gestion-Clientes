@@ -60,12 +60,23 @@ public class FileAccessCliente {
         String[] arrayCadenasDatosCliente = new String[5];//TODO CAMBIAR NUMEROS MÁGICO
         String cadenaDatosCliente = new String(bytesDatosCliente);
 
-        arrayCadenasDatosCliente[0] = cadenaDatosCliente.substring(Utilidades.NUMERO_SUBSTRING, 25);//OK
+        arrayCadenasDatosCliente[0] = cadenaDatosCliente.substring(Utilidades.NUMERO_SUBSTRING, 25);
         arrayCadenasDatosCliente[1] = cadenaDatosCliente.substring(25, 50);
         arrayCadenasDatosCliente[2] = cadenaDatosCliente.substring(50, 59);
         arrayCadenasDatosCliente[3] = cadenaDatosCliente.substring(59, 68);
         arrayCadenasDatosCliente[4] = cadenaDatosCliente.substring(68,98);
 
         return arrayCadenasDatosCliente;
+    }
+
+    public void borrarClienteFicheroClientes(int posicionClienteFicheroIndices) {
+        try(RandomAccessFile randomAccessFile = new RandomAccessFile(ficheroClientes, RANDOMACCESSFILE_MODO_LECTURA)){
+            randomAccessFile.seek((long) (posicionClienteFicheroIndices-1) * getLongitudBytesCliente());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

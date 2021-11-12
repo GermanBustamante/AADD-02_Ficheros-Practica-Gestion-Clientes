@@ -59,6 +59,7 @@ public class Cliente {
 
     @Override
     public String toString() {
+        //TODO STRINGBUILDER QUE LE GUSTA MUCHO
         return "Nombre --> " + nombre +
                 "\nApellidos --> " + apellidos +
                 "\nDNI --> " + DNI +

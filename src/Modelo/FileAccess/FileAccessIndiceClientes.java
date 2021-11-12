@@ -36,14 +36,13 @@ public class FileAccessIndiceClientes {
 
 
     public int getPosicionClienteFichero(String dniCliente) {
-
         int indiceCliente = 0;
         boolean dniEncontrado = false;
         try (FileInputStream fileInputStream = new FileInputStream(ficheroIndiceClientes);
              DataInputStream dataInputStream = new DataInputStream(fileInputStream)) {
             while (!dniEncontrado) {
                 indiceCliente = dataInputStream.readInt();
-                if (new String(dataInputStream.readNBytes(LONGITUD_DNI_STRING_BYTES)).equals(dniCliente)) {
+                if (indiceCliente!=-1 && new String(dataInputStream.readNBytes(LONGITUD_DNI_STRING_BYTES)).equals(dniCliente)) {
                     dniEncontrado = true;
                 }
             }
@@ -53,5 +52,16 @@ public class FileAccessIndiceClientes {
             indiceCliente=-2;
         }
         return indiceCliente;
+    }
+
+    public void borrarClienteFicheroIndices(int posicionClienteFicheroIndices) {
+        try(RandomAccessFile randomAccessFile = new RandomAccessFile(ficheroIndiceClientes, FileAccessCliente.RANDOMACCESSFILE_MODO_LECTURA)){
+            randomAccessFile.seek((long) (posicionClienteFicheroIndices-1) * getLongitudDniYNumeroBytes());
+            //TODO COMO SOBREESCRIBO EL INDICE ACTUAL POR -1
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
