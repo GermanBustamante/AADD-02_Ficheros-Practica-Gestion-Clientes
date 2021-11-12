@@ -1,5 +1,7 @@
 package Modelo.Entidades;
 
+import Modelo.Utilidades.Utilidades;
+
 public class Cliente {
     private String nombre;
     private String apellidos;
@@ -58,9 +60,8 @@ public class Cliente {
     @Override
     public String toString() {
         return "Nombre --> " + nombre +
-                "\tApellidos --> " + apellidos +
+                "\nApellidos --> " + apellidos +
                 "\nDNI --> " + DNI +
-                "\tTelefono --> " + telefono +
                 "\nDireccion --> " + direccion;
     }
 }

@@ -50,7 +50,7 @@ public class FileAccessIndiceClientes {
         } catch (EOFException e) {
             indiceCliente=-1;
         } catch (IOException e) {
-            e.printStackTrace();
+            indiceCliente=-2;
         }
         return indiceCliente;
     }

@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Entidades.Cliente;
 import Modelo.FileAccess.FileAccessCliente;
+import Modelo.FileAccess.FileAccessExportacionClientes;
 import Modelo.FileAccess.FileAccessFicheroConfig;
 import Modelo.FileAccess.FileAccessIndiceClientes;
 import Modelo.Utilidades.Utilidades;
@@ -13,9 +14,11 @@ public class Main {
         int eleccion;
         boolean salida = false;
 
+        //TODO NO TERNERLOS AQUÍ MÉTIDOS HOMBRE O INSTANCIAR SEGÚN ENTRE EN CADA MÉTODO
         FileAccessCliente fileAccessCliente = new FileAccessCliente();
         FileAccessIndiceClientes fileAccessIndiceClientes = new FileAccessIndiceClientes();
         FileAccessFicheroConfig fileAccessFicheroConfig = new FileAccessFicheroConfig();
+        FileAccessExportacionClientes fileAccessExportacionClientes = new FileAccessExportacionClientes();
 
         do {
             eleccion = Menu.mostrarMenuPrincipalEingresarEntradaMenu();
@@ -23,8 +26,8 @@ public class Main {
                 case 1 -> agregarNuevoCliente(fileAccessCliente, fileAccessIndiceClientes);
                 case 2 -> consultarCliente(fileAccessCliente,fileAccessIndiceClientes);
                 case 3 -> borrarCliente();
-                case 4 -> configurarExportacion();
-                case 5 -> exportarClientes();
+                case 4 -> configurarExportacion(fileAccessExportacionClientes);
+                case 5 -> exportarClientes(fileAccessExportacionClientes);
                 case 0 -> salida = true;
             }
         } while (!salida);
@@ -46,8 +49,11 @@ public class Main {
         int posicionClienteFicheroIndices = fileAccessIndiceClientes.getPosicionClienteFichero(DNICliente);
         if (posicionClienteFicheroIndices==-1){
             Menu.mostrarMensajeDNINoEncontrado();
+        }else if (posicionClienteFicheroIndices == 0){
+            Menu.motrarMensajeFicheroVacio();
         }else {
-            //Cliente clienteEncontrado = fileAccessCliente.getClienteDadoIndice(posicionClienteFicheroIndices);
+            Cliente clienteEncontrado = fileAccessCliente.getClienteDadoIndice(posicionClienteFicheroIndices);
+            Menu.mostrarCliente(clienteEncontrado);
         }
     }
 
@@ -59,11 +65,11 @@ public class Main {
          * */
     }
 
-    private static void configurarExportacion() {
-        String formatoFichero = Menu.ingresarOpcionMenuFormato();
+    private static void configurarExportacion(FileAccessExportacionClientes fileAccessExportacionClientes) {
+        fileAccessExportacionClientes.escribirFormatoExportacionFichero(Menu.ingresarOpcionMenuFormato());
     }
 
-    private static void exportarClientes() {
+    private static void exportarClientes(FileAccessExportacionClientes fileAccessExportacionClientes) {
 
     }
 

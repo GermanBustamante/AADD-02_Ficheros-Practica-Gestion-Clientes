@@ -7,16 +7,10 @@ public class Utilidades {
     public static String getDNICliente(int numerosDNICliente) {
         char letra;
         letra = LETRASDNI[numerosDNICliente % 23];
-        return String.format(String.valueOf(numerosDNICliente), letra);
+        return String.valueOf(numerosDNICliente).concat(String.valueOf(letra));
     }
 
     public static String formatearString(int longitudCadena, String formatoCadena, String cadenaAFormatear) {
-        //TODO OPERADOR TERNARIO
-        if (cadenaAFormatear.length() <longitudCadena){
-            cadenaAFormatear = String.format(formatoCadena, cadenaAFormatear);
-        }else {
-            cadenaAFormatear = cadenaAFormatear.substring(NUMERO_SUBSTRING, longitudCadena);
-        }
-        return cadenaAFormatear;
+        return (cadenaAFormatear.length() <longitudCadena) ? String.format(formatoCadena, cadenaAFormatear) : cadenaAFormatear.substring(NUMERO_SUBSTRING, longitudCadena);
     }
 }

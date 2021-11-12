@@ -1,5 +1,6 @@
 package Vista;
 
+import Modelo.Entidades.Cliente;
 import Modelo.Utilidades.Utilidades;
 
 import java.util.Scanner;
@@ -50,6 +51,7 @@ public class Menu {
     public static final String FORMATO_NOMBRE = "%-25s";
     private static final String FORMATO_APELLIDOS = "%-25s";
     private static final String FORMATO_DIRECCION = "%-30s";
+    private static final String MENSAJE_FICHERO_VACIO = "El fichero actualmente se encuentra vacío";
 
     private static StringBuilder stringBuilder;
     private static Scanner teclado = new Scanner(System.in);
@@ -108,5 +110,13 @@ public class Menu {
 
     public static void mostrarMensajeDNINoEncontrado() {
         System.out.println(MENSAJE_DNI_NO_ENCONTRADO);
+    }
+
+    public static void mostrarCliente(Cliente clienteEncontrado) {
+        System.out.println(clienteEncontrado);
+    }
+
+    public static void motrarMensajeFicheroVacio() {
+        System.out.println(MENSAJE_FICHERO_VACIO);
     }
 }

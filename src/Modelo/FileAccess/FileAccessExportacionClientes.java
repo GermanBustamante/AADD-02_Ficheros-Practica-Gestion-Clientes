@@ -22,4 +22,15 @@ public class FileAccessExportacionClientes {
             e.printStackTrace();
         }
     }
+
+    public void escribirFormatoExportacionFichero(String formatoFichero) {
+        try(FileOutputStream fileOutputStream = new FileOutputStream(fichero);
+        DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
+            dataOutputStream.writeBytes(formatoFichero);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
