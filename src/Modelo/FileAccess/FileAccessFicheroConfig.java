@@ -15,22 +15,22 @@ public class FileAccessFicheroConfig {
         this.fichero = new File(RUTA_FICHERO_CONFIGURACION);
     }
 
+    //Escribe el formato pasado en bytes
     public void escribirFormatoFicheroConfiguracion(String formato) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(this.fichero);
              DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)) {
-            dataOutputStream.writeBytes(formato);
+            dataOutputStream.writeBytes(formato);//TODO NO ME FUNCIONA
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public String getFormatoFicheroConfiguracion() {
         String formato = null;
         try (FileInputStream fileInputStream = new FileInputStream(this.fichero);
              DataInputStream dataInputStream = new DataInputStream(fileInputStream)) {
             formato = new String(dataInputStream.readAllBytes());
-        } catch (FileNotFoundException e) {//Si el fichero aun no se ha creado, esto ocurre cuando intentas exportar los clientes sin haber usado el
-            formato = Menu.UTF_8;
         } catch (IOException e) {
             e.printStackTrace();
             return formato;

@@ -16,7 +16,7 @@ public class Validaciones {
         boolean esNumeroEnRango = false;
         int numero = numero1--;//Así si la cadena no es numérico, nunca entrará en el if y no podrá ser true
         if (esEntero(cadenaNumerica)){
-            numero = Integer.parseInt(cadenaNumerica);
+            numero = Integer.parseInt(cadenaNumerica);//TODO NUMBERFORMATEXCEPTION CUANDO EN EL MENU PRINCIPAL LE DOY A INTRO Y LUEGO A UN NUMERO
         }
         if (numero>=numero1 && numero<=numero2){
             esNumeroEnRango = true;

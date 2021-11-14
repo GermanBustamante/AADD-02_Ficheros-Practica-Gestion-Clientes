@@ -53,6 +53,7 @@ public class Menu {
     private static final String FORMATO_APELLIDOS = "%-25s";
     private static final String FORMATO_DIRECCION = "%-30s";
     private static final String MENSAJE_FICHERO_VACIO = "El fichero actualmente se encuentra vacío";
+    private static final String MENSAJE_FICHERO_INEXISTENTE = "El fichero a buscar no existe, creelo añadiendo algún cliente";
 
     private static StringBuilder stringBuilder;
     private static Scanner teclado = new Scanner(System.in);
@@ -62,7 +63,7 @@ public class Menu {
         do {
             System.out.println(MENU_PRINCIPAL);
             eleccionCadena = teclado.nextLine();
-        } while (!Validaciones.esNumeroEnRango(eleccionCadena, MINIMA_ELECCION_MENU_PRINCIPAL, MAXIMA_ELECCION_MENU_PRINCIPAL));
+        } while (!Validaciones.esNumeroEnRango(eleccionCadena, MINIMA_ELECCION_MENU_PRINCIPAL, MAXIMA_ELECCION_MENU_PRINCIPAL+1));
         return Integer.parseInt(eleccionCadena);
     }
 
@@ -120,5 +121,9 @@ public class Menu {
 
     public static void motrarMensajeFicheroVacio() {
         System.out.println(MENSAJE_FICHERO_VACIO);
+    }
+
+    public static void mostrarMensajeFicheroInexistente() {
+        System.out.println(MENSAJE_FICHERO_INEXISTENTE);
     }
 }

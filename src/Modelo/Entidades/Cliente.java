@@ -59,10 +59,9 @@ public class Cliente {
 
     @Override
     public String toString() {
-        //TODO STRINGBUILDER QUE LE GUSTA MUCHO
-        return "Nombre --> " + nombre +
-                "\nApellidos --> " + apellidos +
-                "\nDNI --> " + DNI +
-                "\nDireccion --> " + direccion;
+        return "Nombre --> " + nombre.replace(" ", "") +//TODO CAMBIAR NUMERO MÁGICO
+                "\t|Apellidos --> " + apellidos.replace(" ", "") +
+                "\t|DNI --> " + DNI.replace(" ", "") +
+                "\t|Direccion --> " + direccion.replace(" ", "");
     }
 }
