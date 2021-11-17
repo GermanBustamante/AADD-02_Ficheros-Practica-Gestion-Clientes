@@ -19,7 +19,7 @@ public class FileAccessFicheroConfig {
     public void escribirFormatoFicheroConfiguracion(String formato) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(this.fichero);
              DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)) {
-            dataOutputStream.writeBytes(formato);//TODO NO ME FUNCIONA
+            dataOutputStream.writeBytes(formato);
         } catch (IOException e) {
             e.printStackTrace();
         }

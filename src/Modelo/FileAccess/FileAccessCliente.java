@@ -29,11 +29,11 @@ public class FileAccessCliente {
     public void agregarClienteFichero(Cliente cliente) {
         try(FileOutputStream fileOutputStream = new FileOutputStream(ficheroClientes,true);
             DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)){
-            dataOutputStream.write(cliente.getNombre().getBytes());
-            dataOutputStream.write(cliente.getApellidos().getBytes());
-            dataOutputStream.write(cliente.getDNI().getBytes());
-            dataOutputStream.write(cliente.getTelefono().getBytes());
-            dataOutputStream.write(cliente.getDireccion().getBytes());
+            dataOutputStream.writeBytes(cliente.getNombre());
+            dataOutputStream.writeBytes(cliente.getApellidos());
+            dataOutputStream.writeBytes(cliente.getDNI());
+            dataOutputStream.writeBytes(cliente.getTelefono());
+            dataOutputStream.writeBytes(cliente.getDireccion());
         }catch (IOException e){
             e.printStackTrace();
         }

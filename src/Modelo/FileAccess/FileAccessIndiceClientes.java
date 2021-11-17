@@ -8,8 +8,8 @@ import java.util.List;
 
 public class FileAccessIndiceClientes {
     private File ficheroIndiceClientes;
-    public static final int LONGITUD_INT_BYTES = 4;//TODO 5
-    public static final int LONGITUD_DNI_STRING_BYTES = 9;//TODO 6
+    public static final int LONGITUD_INT_BYTES = 4;
+    public static final int LONGITUD_DNI_STRING_BYTES = 9;
 
     public static final String RUTA_FICHERO_INDICE_CLIENTES = "indice_clientes.bin";
 
@@ -25,7 +25,7 @@ public class FileAccessIndiceClientes {
         try (FileOutputStream fileOutputStream = new FileOutputStream(ficheroIndiceClientes, true);
              DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)) {
             dataOutputStream.writeInt(getNumeroClientes() + 1);//TODO CAMBIAR NUMERO MÁGICO
-            dataOutputStream.write(DNICliente.getBytes());
+            dataOutputStream.writeBytes(DNICliente);
         } catch (IOException e) {
             e.printStackTrace();
         }
