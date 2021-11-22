@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileAccessClienteTest {
+class FileAccessExportacionClientesTest {
 
     @BeforeEach
     void setUp() {
@@ -17,14 +17,10 @@ class FileAccessClienteTest {
     }
 
     @Test
-    void agregarClienteFichero() {
+    void escribirClientesFicheroTexto() {
     }
 
     @Test
-    void getClienteDadoIndice() {
-    }
-
-    @Test
-    void getListaFicheroClientes() {
+    void testEscribirClientesFicheroTexto() {
     }
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileAccessClienteTest {
+class FileAccessIndiceClientesTest {
 
     @BeforeEach
     void setUp() {
@@ -17,14 +17,18 @@ class FileAccessClienteTest {
     }
 
     @Test
-    void agregarClienteFichero() {
+    void agregarIndiceYDNIFicheroIndiceClientes() {
     }
 
     @Test
-    void getClienteDadoIndice() {
+    void getPosicionClienteFichero() {
     }
 
     @Test
-    void getListaFicheroClientes() {
+    void borrarClienteFicheroIndices() {
+    }
+
+    @Test
+    void getListaIndicesClientesBorrados() {
     }
 }
