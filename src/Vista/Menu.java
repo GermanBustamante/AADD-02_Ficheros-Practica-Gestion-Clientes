@@ -16,47 +16,47 @@ public class Menu {
             5. Exportar clientes.
             0. Salir.
             """;
-
     public static final String MENU_FORMATO_FICHERO = """
-            1 -> US-ASCII
-            2 -> ISO-8859-1
-            3 -> UTF-8
-            4 -> UTF-16BE
-            5 -> UTF-16LE
-            6 -> UFT-16
-            NOTA: SI NO COINCIDE NINGUNO DE LOS DATOS, SE TOMARÁ POR DEFECTO UTF-8
-            """;
-
+                    1 -> US-ASCII
+                    2 -> ISO-8859-1
+                    3 -> UTF-8
+                    4 -> UTF-16BE
+                    5 -> UTF-16LE
+                    6 -> UFT-16
+                    NOTA: SI NO COINCIDE NINGUNO DE LOS DATOS, SE TOMARÁ POR DEFECTO UTF-8
+                    """;
     public static final String MENSAJE_DNI_NO_ENCONTRADO = "No se ha encontrado ningún DNI";
-    public static final int MINIMA_ELECCION_MENU_PRINCIPAL = 0;
-    public static final int MAXIMA_ELECCION_MENU_PRINCIPAL = 5;
-    public static final int MINIMA_LONGITUD_CADENA = 1;
-    public static final int LONGITUD_NOMBRE_CLIENTE = 25;
-    public static final int LONGITUD_APELLIDOS_CLIENTE = 25;
-    public static final int LONGITUD_DIRECCION_CLIENTE = 30;
-    public static final int LONGITUD_NUMEROS_DNI = 8;
-    public static final int LONGITUD_TELEFONO = 9;
     public static final String US_ASCII = "US-ASCII";
     public static final String ISO_8859_1 = "ISO-8859-1";
     public static final String UTF_8 = "UTF-8";
     public static final String UTF_16BE = "UTF-16BE";
     public static final String UTF_16LE = "UTF-16LE";
     public static final String UTF_16 = "UTF-16";
-
     public static final String INGRESO_NOMBRE_CLIENTE = "Ingresa el nombre del cliente";
     public static final String INGRESO_APELLIDOS_CLIENTE = "Ingresa los apellidos del cliente";
     public static final String MENSAJE_ERROR_GENERAL = "Ha ocurrido algún error";
-    private static final String INGRESO_DIRECCION_CLIENTE = "Ingresa la dirección del cliente";
-    private static final String INGRESO_DNI_CLIENTE = "Ingresa el DNI del cliente";
-    private static final String INGRESO_TELEFONO_CLIENTE = "Ingresa el teléfono del cliente";
-
+    public static final String INGRESO_DIRECCION_CLIENTE = "Ingresa la dirección del cliente";
+    public static final String INGRESO_DNI_CLIENTE = "Ingresa el DNI del cliente";
+    public static final String INGRESO_TELEFONO_CLIENTE = "Ingresa el teléfono del cliente";
     public static final String FORMATO_NOMBRE = "%-25s";
     public static final String FORMATO_APELLIDOS = "%-25s";
     public static final String FORMATO_DIRECCION = "%-30s";
     public static final String MENSAJE_FICHERO_VACIO = "El fichero actualmente se encuentra vacío";
     public static final String MENSAJE_FICHERO_INEXISTENTE_VACIO = "Los ficheros a buscar no existen o están vacíos, rellenelos o creelos añadiendo algún cliente";
+    public static final String MENSAJE_FICHERO_CONGFIGURACION_NO_LISTO = "El fichero de configuración no está preparado";
+    public static final String MENSAJE_CLIENTES_NO_CARGADOS = "Los clientes no se han cargado correctamente";
 
-    private static StringBuilder stringBuilder;
+
+
+    public static final int MINIMA_ELECCION_MENU_PRINCIPAL = 0,
+            MAXIMA_ELECCION_MENU_PRINCIPAL = 5,
+            MINIMA_LONGITUD_CADENA = 1,
+            LONGITUD_NOMBRE_CLIENTE = 25,
+            LONGITUD_APELLIDOS_CLIENTE = 25,
+            LONGITUD_DIRECCION_CLIENTE = 30,
+            LONGITUD_NUMEROS_DNI = 8,
+            LONGITUD_TELEFONO = 9;
+
     private static Scanner teclado = new Scanner(System.in);
 
     public static int mostrarMenuPrincipalEingresarEntradaMenu() {
@@ -64,7 +64,7 @@ public class Menu {
         do {
             System.out.println(MENU_PRINCIPAL);
             eleccionCadena = teclado.nextLine();
-        } while (!Validaciones.esNumeroEnRango(eleccionCadena, MINIMA_ELECCION_MENU_PRINCIPAL, MAXIMA_ELECCION_MENU_PRINCIPAL+1));
+        } while (!Validaciones.esNumeroEnRango(eleccionCadena, MINIMA_ELECCION_MENU_PRINCIPAL, MAXIMA_ELECCION_MENU_PRINCIPAL + 1));
         return Integer.parseInt(eleccionCadena);
     }
 
@@ -73,8 +73,8 @@ public class Menu {
         do {
             System.out.println(INGRESO_NOMBRE_CLIENTE);
             nombre = teclado.nextLine();
-        }while (Validaciones.esCampoVacio(nombre));
-        return Utilidades.formatearString(LONGITUD_NOMBRE_CLIENTE, FORMATO_NOMBRE,nombre);
+        } while (Validaciones.esCampoVacio(nombre));
+        return Utilidades.formatearString(LONGITUD_NOMBRE_CLIENTE, FORMATO_NOMBRE, nombre);
     }
 
     public static String ingresarApellidosCliente() {
@@ -82,8 +82,8 @@ public class Menu {
         do {
             System.out.println(INGRESO_APELLIDOS_CLIENTE);
             apellidos = teclado.nextLine();
-        }while (Validaciones.esCampoVacio(apellidos));
-        return Utilidades.formatearString(LONGITUD_APELLIDOS_CLIENTE, FORMATO_APELLIDOS,apellidos);
+        } while (Validaciones.esCampoVacio(apellidos));
+        return Utilidades.formatearString(LONGITUD_APELLIDOS_CLIENTE, FORMATO_APELLIDOS, apellidos);
     }
 
     public static int ingresarNumerosDNICliente() {
@@ -109,18 +109,18 @@ public class Menu {
         do {
             System.out.println(INGRESO_DIRECCION_CLIENTE);
             direccion = teclado.nextLine();
-        }while (Validaciones.esCampoVacio(direccion));
-        return Utilidades.formatearString(LONGITUD_DIRECCION_CLIENTE, FORMATO_DIRECCION,direccion);
+        } while (Validaciones.esCampoVacio(direccion));
+        return Utilidades.formatearString(LONGITUD_DIRECCION_CLIENTE, FORMATO_DIRECCION, direccion);
     }
 
 
     public static String ingresarOpcionMenuFormato() {
         String eleccion;
-            System.out.println(MENU_FORMATO_FICHERO);
-            eleccion = teclado.nextLine();
-            if (!Validaciones.validarMenuFormato(eleccion)){//Si no cumple ninguno de los formatos
-                eleccion = UTF_8;
-            }
+        System.out.println(MENU_FORMATO_FICHERO);
+        eleccion = teclado.nextLine();
+        if (!Validaciones.validarMenuFormato(eleccion)) {//Si no cumple ninguno de los formatos
+            eleccion = UTF_8;
+        }
         return eleccion;
     }
 

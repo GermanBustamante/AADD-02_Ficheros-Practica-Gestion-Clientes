@@ -1,9 +1,5 @@
 package Modelo.Entidades;
 
-import Modelo.Utilidades.Utilidades;
-
-import java.util.Objects;
-
 public class Cliente {
     private String nombre;
     private String apellidos;
