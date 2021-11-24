@@ -2,6 +2,8 @@ package Modelo.Entidades;
 
 import Modelo.Utilidades.Utilidades;
 
+import java.util.Objects;
+
 public class Cliente {
     private String nombre;
     private String apellidos;
@@ -62,6 +64,19 @@ public class Cliente {
         return "Nombre --> " + nombre.replace(" ", "") +//TODO CAMBIAR NUMERO MÁGICO
                 "\t|Apellidos --> " + apellidos.replace(" ", "") +
                 "\t|DNI --> " + DNI.replace(" ", "") +
+                "\tTelefono --> "+ telefono.replace(" ", "") +
                 "\t|Direccion --> " + direccion.replace(" ", "");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean iguales = false;
+        if (this == o){
+            iguales= true;
+        }else if (o instanceof Cliente && this.DNI.equals(((Cliente) o).DNI)){
+            iguales = true;
+        }
+        return iguales;
+    }
+
 }

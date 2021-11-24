@@ -38,4 +38,8 @@ public class Validaciones {
         return eleccion.equals(Menu.US_ASCII) || eleccion.equals(Menu.ISO_8859_1) || eleccion.equals(Menu.UTF_8) ||
                 eleccion.equals(Menu.UTF_16LE) || eleccion.equals(Menu.UTF_16BE) || eleccion.equals(Menu.UTF_16);
     }
+
+    public static boolean esCampoVacio(String cadena) {
+    return cadena.isBlank() || cadena.isEmpty();
+    }
 }

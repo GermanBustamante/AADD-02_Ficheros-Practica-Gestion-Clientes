@@ -1,6 +1,8 @@
 package Modelo.Utilidades;
 
+import java.io.Closeable;
 import java.io.File;
+import java.io.IOException;
 
 public class Utilidades {
     public static final char[] LETRASDNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
@@ -17,7 +19,21 @@ public class Utilidades {
         return (cadenaAFormatear.length() <longitudCadena) ? String.format(formatoCadena, cadenaAFormatear) : cadenaAFormatear.substring(NUMERO_SUBSTRING, longitudCadena);
     }
 
-    public static boolean existeFichero(String rutaFichero){
-        return new File(rutaFichero).exists();
+    public static boolean existeFichero(File fichero){
+        return fichero.exists();
+    }
+
+    public static void cerrarFlujo(AutoCloseable flujo) {
+        if (flujo!=null){
+            try {
+                flujo.close();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    public static boolean estaVacioFichero(File fichero) {
+        return fichero.length()==0;
     }
 }

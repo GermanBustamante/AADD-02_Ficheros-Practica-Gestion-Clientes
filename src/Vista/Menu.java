@@ -45,15 +45,16 @@ public class Menu {
 
     public static final String INGRESO_NOMBRE_CLIENTE = "Ingresa el nombre del cliente";
     public static final String INGRESO_APELLIDOS_CLIENTE = "Ingresa los apellidos del cliente";
+    public static final String MENSAJE_ERROR_GENERAL = "Ha ocurrido algún error";
     private static final String INGRESO_DIRECCION_CLIENTE = "Ingresa la dirección del cliente";
     private static final String INGRESO_DNI_CLIENTE = "Ingresa el DNI del cliente";
     private static final String INGRESO_TELEFONO_CLIENTE = "Ingresa el teléfono del cliente";
 
     public static final String FORMATO_NOMBRE = "%-25s";
-    private static final String FORMATO_APELLIDOS = "%-25s";
-    private static final String FORMATO_DIRECCION = "%-30s";
-    private static final String MENSAJE_FICHERO_VACIO = "El fichero actualmente se encuentra vacío";
-    private static final String MENSAJE_FICHERO_INEXISTENTE = "El fichero a buscar no existe, creelo añadiendo algún cliente";
+    public static final String FORMATO_APELLIDOS = "%-25s";
+    public static final String FORMATO_DIRECCION = "%-30s";
+    public static final String MENSAJE_FICHERO_VACIO = "El fichero actualmente se encuentra vacío";
+    public static final String MENSAJE_FICHERO_INEXISTENTE_VACIO = "Los ficheros a buscar no existen o están vacíos, rellenelos o creelos añadiendo algún cliente";
 
     private static StringBuilder stringBuilder;
     private static Scanner teclado = new Scanner(System.in);
@@ -68,13 +69,21 @@ public class Menu {
     }
 
     public static String ingresarNombreCliente() {
-        System.out.println(INGRESO_NOMBRE_CLIENTE);
-        return Utilidades.formatearString(LONGITUD_NOMBRE_CLIENTE, FORMATO_NOMBRE,teclado.nextLine());
+        String nombre = null;
+        do {
+            System.out.println(INGRESO_NOMBRE_CLIENTE);
+            nombre = teclado.nextLine();
+        }while (Validaciones.esCampoVacio(nombre));
+        return Utilidades.formatearString(LONGITUD_NOMBRE_CLIENTE, FORMATO_NOMBRE,nombre);
     }
 
     public static String ingresarApellidosCliente() {
-        System.out.println(INGRESO_APELLIDOS_CLIENTE);
-        return Utilidades.formatearString(LONGITUD_APELLIDOS_CLIENTE, FORMATO_APELLIDOS,teclado.nextLine());
+        String apellidos = null;
+        do {
+            System.out.println(INGRESO_APELLIDOS_CLIENTE);
+            apellidos = teclado.nextLine();
+        }while (Validaciones.esCampoVacio(apellidos));
+        return Utilidades.formatearString(LONGITUD_APELLIDOS_CLIENTE, FORMATO_APELLIDOS,apellidos);
     }
 
     public static int ingresarNumerosDNICliente() {
@@ -96,8 +105,12 @@ public class Menu {
     }
 
     public static String ingresarDireccionCliente() {
-        System.out.println(INGRESO_DIRECCION_CLIENTE);
-        return Utilidades.formatearString(LONGITUD_DIRECCION_CLIENTE, FORMATO_DIRECCION,teclado.nextLine());
+        String direccion = null;
+        do {
+            System.out.println(INGRESO_DIRECCION_CLIENTE);
+            direccion = teclado.nextLine();
+        }while (Validaciones.esCampoVacio(direccion));
+        return Utilidades.formatearString(LONGITUD_DIRECCION_CLIENTE, FORMATO_DIRECCION,direccion);
     }
 
 
@@ -119,11 +132,15 @@ public class Menu {
         System.out.println(clienteEncontrado);
     }
 
-    public static void motrarMensajeFicheroVacio() {
-        System.out.println(MENSAJE_FICHERO_VACIO);
+    public static void mostrarMensajeFicheroInexistente() {
+        System.out.println(MENSAJE_FICHERO_INEXISTENTE_VACIO);
     }
 
-    public static void mostrarMensajeFicheroInexistente() {
-        System.out.println(MENSAJE_FICHERO_INEXISTENTE);
+    public static void mostrarMensajeError(String message) {
+        System.err.println(message);
+    }
+
+    public static void mostrarMensaje(String message) {
+        System.out.println(message);
     }
 }
