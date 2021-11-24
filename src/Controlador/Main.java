@@ -61,24 +61,6 @@ public class Main {
         return new Cliente(nombreCliente, apellidosCliente, dniCliente, telefonoCliente, direccionCliente);
     }
 
-//    private static void consultarCliente(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes) {
-//        if (Utilidades.existeFichero(fileAccessIndiceClientes.getFichero()) && Utilidades.existeFichero(fileAccessCliente.getFichero()) && !(Utilidades.estaVacioFichero(fileAccessIndiceClientes.getFichero()) && Utilidades.estaVacioFichero(fileAccessCliente.getFichero()))) {
-//            String dniCliente = Utilidades.getDNICliente(Menu.ingresarNumerosDNICliente());
-//            int posicionClienteFicheroIndices = 0;
-//            try {
-//                posicionClienteFicheroIndices = fileAccessIndiceClientes.getPosicionClienteFicheroBinario(dniCliente);
-//                Cliente clienteRecogido = fileAccessCliente.getClienteFicheroBinario(posicionClienteFicheroIndices);
-//                Menu.mostrarCliente(clienteRecogido);
-//            } catch (EOFException e) {//Llega cuando no ha encontrado el DNI
-//                Menu.mostrarMensaje(Menu.MENSAJE_DNI_NO_ENCONTRADO);
-//            } catch (IOException e) {
-//                Menu.mostrarMensajeError(e.getMessage());
-//            }
-//        } else {
-//            Menu.mostrarMensaje(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
-//        }
-//    }
-
     private static void consultarOBorrarCliente(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes, boolean esConsulta) {
         if (Utilidades.existeFichero(fileAccessIndiceClientes.getFichero()) && !Utilidades.estaVacioFichero(fileAccessIndiceClientes.getFichero())) {
             String dniCliente = Utilidades.getDNICliente(Menu.ingresarNumerosDNICliente());
