@@ -59,12 +59,6 @@ class FileAccessClienteTest {
         assertNotEquals(listaClientesCompleta, listaClientesRecogida);
     }
 
-    //Esto ocurriría cuando le pasaramos a getListaClientesNoBorradosFicheroClientes una lista Integer nula
-    @Test
-    void TestCasoValidoGetListaClientesNoBorradosFicheroClientesListaIndicesNula(){
-assertThrows(NullPointerException.class, () -> fileAccessCliente.getListaClientesNoBorradosFicheroBinario(null));
-    }
-
     //NOTA: Este test nunca ocurriría ya que no se puede ingresar un valor nulo, lo controla el menú
     @Test
     void TestCasoNoValidoAgregarClienteFicheroPropiedadNullLanzaExcepcion() {

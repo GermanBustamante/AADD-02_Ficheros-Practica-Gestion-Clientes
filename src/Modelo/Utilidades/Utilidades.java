@@ -1,6 +1,11 @@
 package Modelo.Utilidades;
 
 import java.io.*;
+/**
+ * <b>Clase que contendrá métodos que reutilizaremos en distintas clases<b>
+ * @author germanbustamante_
+ * @version 1.0
+ */
 
 public class Utilidades {
     public static final char[] LETRASDNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
@@ -9,8 +14,7 @@ public class Utilidades {
     public static String getDNICliente(int numerosDNICliente) {
         char letra;
         letra = LETRASDNI[numerosDNICliente % 23];
-        StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(String.valueOf(numerosDNICliente)).append(String.valueOf(letra)).toString();
+        return new StringBuilder().append(numerosDNICliente).append(letra).toString();
     }
 
     public static String formatearString(int longitudCadena, String formatoCadena, String cadenaAFormatear) {
@@ -19,16 +23,6 @@ public class Utilidades {
 
     public static boolean existeFichero(File fichero) {
         return fichero.exists();
-    }
-
-    public static void cerrarFlujo(AutoCloseable flujo) {
-        if (flujo != null) {
-            try {
-                flujo.close();
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        }
     }
 
     public static boolean estaVacioFichero(File fichero) {
