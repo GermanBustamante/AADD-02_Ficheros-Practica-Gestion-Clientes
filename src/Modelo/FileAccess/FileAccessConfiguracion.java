@@ -2,15 +2,17 @@ package Modelo.FileAccess;
 
 import java.io.*;
 /**
- * <b>Clase que nos servirá para gestionar el fichero "configuracion.bin" donde gestionaremos la forma de configurar la exportación de cliente de nuestro programa</b>
+ * Clase que nos servirá para gestionar el fichero "configuracion.bin" donde gestionaremos la forma de configurar la exportación de cliente de nuestro programa
  * @author germanbustamante_
  * @version 1.0
  */
 public class FileAccessConfiguracion {
     //Atributos
     private final File fichero;
+
     //Constantes
     public static final String RUTA_FICHERO_CONFIGURACION = "configuracion.bin";
+
     //Constructores
     public FileAccessConfiguracion() {
         this.fichero = new File(RUTA_FICHERO_CONFIGURACION);
@@ -18,6 +20,7 @@ public class FileAccessConfiguracion {
     public FileAccessConfiguracion(String rutaFichero) {
         this.fichero = new File(rutaFichero);
     }
+
     //Getters
     public File getFichero() {
         return fichero;
@@ -42,7 +45,7 @@ public class FileAccessConfiguracion {
      * <b>Cabecera:</b> public String getFormatoFicheroConfiguracion()<br/>
      * <b>Precondiciones:</b> ninguna<br/>
      * <b>Postcondiciones:</b> Lee todos los bytes de un fichero y lo devuelve en cadena<br/>
-     * @return
+     * @return String formato, el formato en el que se va a escribir el fichero de exportación
      * @throws IOException ha ocurrido un error con el flujo de datos
      */
     public String getFormatoFicheroConfiguracion() throws IOException {

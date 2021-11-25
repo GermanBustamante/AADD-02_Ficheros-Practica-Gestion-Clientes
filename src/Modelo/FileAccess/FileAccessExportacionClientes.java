@@ -5,7 +5,7 @@ import Modelo.Entidades.Cliente;
 import java.io.*;
 import java.util.List;
 /**
- * <b>Clase que nos servirá para gestionar el fichero "clientes.txt" donde gestionaremos la forma de escribir la exportación de cliente de nuestro programa</b>
+ * Clase que nos servirá para gestionar el fichero "clientes.txt" donde gestionaremos la forma de escribir la exportación de cliente de nuestro programa
  * @author germanbustamante_
  * @version 1.0
  */

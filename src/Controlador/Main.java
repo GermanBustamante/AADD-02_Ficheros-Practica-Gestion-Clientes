@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <b>Clase cumplirá el papel de Controladora en nuestro programa MVC<b>
+ * Clase cumplirá el papel de Controladora en nuestro programa MVC<br/>
  * NOTA: CUANDO ESCRIBEN DATOS SOLO SE CONTROLA LA IOEXCEPTION, PERO CUANDO SE RECOGE DEBE CONTROLAR
  * LA IO COMO ERROR GENERAL O EOF CUANDO HA TERMINADO DE LEER EN CASO DE QUE EL MÉTODO DEBE LEER EL FICHERO ENTERO
  *
@@ -30,7 +30,7 @@ public class Main {
         FileAccessConfiguracion fileAccessConfiguracion = new FileAccessConfiguracion();
         FileAccessExportacionClientes fileAccessExportacionClientes = new FileAccessExportacionClientes();
         do {
-            eleccion = Menu.mostrarMenuPrincipalEingresarEntradaMenu();
+            eleccion = Menu.imprimirMenuPrincipalEingresarOpcion();
             switch (eleccion) {
                 case 1 -> aniadirCliente(fileAccessCliente, fileAccessIndiceClientes);
                 case 2 -> consultarOBorrarCliente(fileAccessCliente, fileAccessIndiceClientes, true);
@@ -46,7 +46,7 @@ public class Main {
         Cliente cliente = pedirDatosClienteInstanciado();
         try {
             fileAccessCliente.escribirClienteFicheroBinario(cliente);
-            fileAccessIndiceClientes.escribirIndiceYDNIFicheroBinario(cliente.getDNI());
+            fileAccessIndiceClientes.escribirIndiceYDNIFicheroBinario(cliente.getDni());
         } catch (IOException e) {
             Menu.mostrarMensajeError(e.getMessage());
         }
@@ -55,7 +55,7 @@ public class Main {
     private static Cliente pedirDatosClienteInstanciado() {
         String nombreCliente = Menu.ingresarNombreCliente();
         String apellidosCliente = Menu.ingresarApellidosCliente();
-        String dniCliente = Utilidades.getDNICliente(Menu.ingresarNumerosDNICliente());
+        String dniCliente = Utilidades.getDNICompleto(Menu.ingresarNumerosDNICliente());
         String telefonoCliente = Menu.ingresarTelefonoCliente();
         String direccionCliente = Menu.ingresarDireccionCliente();
         return new Cliente(nombreCliente, apellidosCliente, dniCliente, telefonoCliente, direccionCliente);
@@ -63,14 +63,14 @@ public class Main {
 
     private static void consultarOBorrarCliente(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes, boolean esConsulta) {
         if (Utilidades.existeFichero(fileAccessIndiceClientes.getFichero()) && !Utilidades.estaVacioFichero(fileAccessIndiceClientes.getFichero())) {
-            String dniCliente = Utilidades.getDNICliente(Menu.ingresarNumerosDNICliente());
+            String dniCliente = Utilidades.getDNICompleto(Menu.ingresarNumerosDNICliente());
             int posicionClienteFicheroIndices = 0;
             try {
                 posicionClienteFicheroIndices = fileAccessIndiceClientes.getPosicionClienteFicheroBinario(dniCliente);
-                if (esConsulta){
+                if (esConsulta) {
                     Cliente clienteRecogido = fileAccessCliente.getClienteFicheroBinario(posicionClienteFicheroIndices);
                     Menu.mostrarCliente(clienteRecogido);
-                }else {
+                } else {
                     fileAccessIndiceClientes.borrarClienteFicheroBinario(posicionClienteFicheroIndices);
                 }
             } catch (EOFException e) {//Cuando no encuentra el indice a borrar
@@ -79,13 +79,13 @@ public class Main {
                 Menu.mostrarMensajeError(e.getMessage());
             }
         } else {
-            Menu.mostrarMensaje(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
+            Menu.mostrarMensajeError(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
         }
     }
 
     private static void configurarExportacion(FileAccessConfiguracion fileAccessConfiguracion) {
         try {
-            fileAccessConfiguracion.escribirFormatoFicheroConfiguracion(Menu.ingresarOpcionMenuFormato());
+            fileAccessConfiguracion.escribirFormatoFicheroConfiguracion(Menu.imprimirMenuConfiguracionEingresarOpcion());
         } catch (IOException e) {
             Menu.mostrarMensajeError(e.getMessage());
         }
@@ -101,14 +101,12 @@ public class Main {
                 && !(Utilidades.estaVacioFichero(fileAccessIndiceClientes.getFichero()) && Utilidades.estaVacioFichero(fileAccessCliente.getFichero()))) {
             try {
                 listaIndicesClientesBorrados = fileAccessIndiceClientes.getListaIndicesClientesBorradosFicheroBinario();
-                if (listaIndicesClientesBorrados != null) {//Puede dar null por alguna excepción
+                if (listaIndicesClientesBorrados != null) {//Puede dar null por haber lanzado alguna excepción
                     listaClientes = fileAccessCliente.getListaClientesNoBorradosFicheroBinario(listaIndicesClientesBorrados);
-                    //Si existe el fichero de configuración y no está vacío
-                    if (Utilidades.existeFichero(fileAccessConfiguracion.getFichero()) &&
+                    if (Utilidades.existeFichero(fileAccessConfiguracion.getFichero()) &&  //Si existe el fichero de configuración y no está vacío
                             !Utilidades.estaVacioFichero(fileAccessConfiguracion.getFichero()) && listaClientes != null) {
                         formato = fileAccessConfiguracion.getFormatoFicheroConfiguracion();
                         fileAccessExportacionClientes.escribirClientesFicheroTexto(listaClientes, formato);
-
                     } else if (!(Utilidades.existeFichero(fileAccessConfiguracion.getFichero()) &&
                             !Utilidades.estaVacioFichero(fileAccessConfiguracion.getFichero()))) {//Si la lista de clientes está vacía
                         Menu.mostrarMensaje(Menu.MENSAJE_FICHERO_CONGFIGURACION_NO_LISTO);
@@ -120,7 +118,7 @@ public class Main {
                 Menu.mostrarMensajeError(e.getMessage());
             }
         } else {
-            Menu.mostrarMensaje(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
+            Menu.mostrarMensajeError(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
         }
     }
 

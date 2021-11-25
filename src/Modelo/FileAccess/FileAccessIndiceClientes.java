@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <b>Clase que nos servirá para gestionar el fichero "indice_clientes.bin" donde gestionaremos los indices de los clientes de nuestro programa</b>
+ * Clase que nos servirá para gestionar el fichero "indice_clientes.bin" donde gestionaremos los indices de los clientes de nuestro programa
  * @author germanbustamante_
  * @version 1.0
  */
 public class FileAccessIndiceClientes {
     //Atributos
     private final File fichero;
+
     //Constantes
     public static final int LONGITUD_INT_BYTES = 4;
     public static final int LONGITUD_DNI_STRING_BYTES = 9;
@@ -24,6 +25,7 @@ public class FileAccessIndiceClientes {
     public FileAccessIndiceClientes(String rutaFichero) {
         this.fichero = new File(rutaFichero);
     }
+
     //Getters
     public File getFichero() {
         return fichero;
@@ -40,7 +42,7 @@ public class FileAccessIndiceClientes {
     public void escribirIndiceYDNIFicheroBinario(String dniCliente) throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(fichero, true);
              DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)) {
-            dataOutputStream.writeInt(getNumeroClientes() + 1);//TODO NUMERO MÁGICO
+            dataOutputStream.writeInt(getNumeroClientes() + 1);//TODO NUMERO MAGICO
             dataOutputStream.writeBytes(dniCliente);
         }
     }
