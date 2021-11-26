@@ -11,7 +11,7 @@ public class FileAccessConfiguracion {
     private final File fichero;
 
     //Constantes
-    public static final String RUTA_FICHERO_CONFIGURACION = "configuracion.bin";
+    public static final String RUTA_FICHERO_CONFIGURACION = ".//Ficheros//configuracion.bin";
 
     //Constructores
     public FileAccessConfiguracion() {

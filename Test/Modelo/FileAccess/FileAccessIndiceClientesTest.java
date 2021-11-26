@@ -1,6 +1,7 @@
 package Modelo.FileAccess;
 
 import Modelo.Utilidades.Utilidades;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +15,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileAccessIndiceClientesTest {
 
     private static FileAccessIndiceClientes fileAccessIndiceClientes;
-    public static final String RUTA_FICHERO_INDICE_CLIENTES_PRUEBA = "indices_clientes_prueba.bin";
+    public static final String RUTA_FICHERO_INDICE_CLIENTES_PRUEBA = ".//Ficheros//indices_clientes_prueba.bin";
     public static final String DNI_PRUEBA = "29565540Y";
 
     @BeforeAll
     static void instanciarFileAccess() {
         fileAccessIndiceClientes = new FileAccessIndiceClientes(RUTA_FICHERO_INDICE_CLIENTES_PRUEBA);
+    }
+
+    @AfterAll
+    static void borrarFicheroPrueba(){
+        fileAccessIndiceClientes.getFichero().delete();
     }
 
     //Antes de cada método vaciamos el fichero de clientes de prueba

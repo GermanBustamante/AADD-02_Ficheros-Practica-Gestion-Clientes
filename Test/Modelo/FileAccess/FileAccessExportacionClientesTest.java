@@ -3,6 +3,7 @@ package Modelo.FileAccess;
 import Modelo.Entidades.Cliente;
 import Modelo.Utilidades.Utilidades;
 import Vista.Menu;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FileAccessExportacionClientesTest {
     private static FileAccessExportacionClientes fileAccessExportacionClientes;
-    public static final String RUTA_FICHERO_CLIENTES_TXT_PRUEBA = "clientes_prueba.txt";
+    public static final String RUTA_FICHERO_CLIENTES_TXT_PRUEBA = ".//Ficheros//clientes_prueba.txt";
     public static final String CADENA_CHORRA = "MOMO";
 
     @BeforeAll
@@ -23,6 +24,10 @@ class FileAccessExportacionClientesTest {
         fileAccessExportacionClientes = new FileAccessExportacionClientes(RUTA_FICHERO_CLIENTES_TXT_PRUEBA);
     }
 
+    @AfterAll
+    static void borrarFicheroPrueba(){
+        fileAccessExportacionClientes.getFichero().delete();
+    }
     //Antes de cada método vaciamos el fichero de clientes de prueba
     @BeforeEach
     void vaciarFicheroClientesPrueba() {

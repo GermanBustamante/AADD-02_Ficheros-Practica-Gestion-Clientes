@@ -23,7 +23,7 @@ public class Validaciones {
     }
 
     /**
-     * <b>Cabecera:</b> public static boolean esNumeroEnRango(String cadenaNumerica, int minimoRango, int maximoRango)<br/>
+     * <b>Cabecera:</b> public static boolean esesEnteroEnRangoEnRango(String cadenaNumerica, int minimoRango, int maximoRango)<br/>
      * <b>Precondiciones:</b> los parámetros deben ser válidos<br/>
      * <b>Postcondiciones:</b> Devuelve un booleano en función de si la cadena pasada es un número entre un rango<br/>
      * @param cadenaNumerica la cadena a comprobar
@@ -52,7 +52,7 @@ public class Validaciones {
      * @return true si es un numero en el de X longitud y false en caso contrario
      */
     public static boolean esNumeroEnRango(String cadenaNumerica, int longitud) {
-        return (esEntero(cadenaNumerica) && cadenaNumerica.length() == longitud);
+        return (!esEntero(cadenaNumerica) || cadenaNumerica.length() != longitud);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Validaciones {
      * @param cadena cadena a comprobar
      * @return true en caso de que el parámetro está en blanco o vacío o false en caso contrario
      */
-    public static boolean esCampoVacio(String cadena) {
+    public static boolean esCadenaVacia(String cadena) {
         return cadena.isBlank() || cadena.isEmpty();
     }
 }

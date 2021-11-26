@@ -4,13 +4,12 @@ import Modelo.Entidades.Cliente;
 import Modelo.Utilidades.Utilidades;
 
 import java.util.Scanner;
-
+/**
+ * Clase que contendrá métodos estáticos y constantes para imprimir y validar
+ * @author germanbustamante_
+ * @version 1.0
+ */
 public class Menu {
-    /**
-     * <b>Cabecera:</b> <br/>
-     * <b>Precondiciones:</b> <br/>
-     * <b>Postcondiciones:</b> <br/>
-     * */
     //Constantes
     public static final String MENU_PRINCIPAL = """
             Gestor de clientes:
@@ -49,7 +48,6 @@ public class Menu {
     public static final String MENSAJE_FICHERO_INEXISTENTE_VACIO = "Los ficheros a buscar no existen o están vacíos, rellenelos o creelos añadiendo algún cliente";
     public static final String MENSAJE_FICHERO_CONGFIGURACION_NO_LISTO = "El fichero de configuración no está preparado";
     public static final String MENSAJE_CLIENTES_NO_CARGADOS = "Los clientes no se han cargado correctamente";
-
     public static final int MINIMA_ELECCION_MENU_PRINCIPAL = 0;
     public static final int MAXIMA_ELECCION_MENU_PRINCIPAL = 5;
     public static final int LONGITUD_NOMBRE_CLIENTE = 25;
@@ -58,8 +56,16 @@ public class Menu {
     public static final int LONGITUD_NUMEROS_DNI = 8;
     public static final int LONGITUD_TELEFONO = 9;
 
+    //Atributos
     private static Scanner teclado = new Scanner(System.in);
+
     //Metodos públicos
+    /**
+     * <b>Cabecera:</b> public static int imprimirMenuPrincipalEingresarOpcion()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime por pantalla el menú principal y pide por teclado una elección, no saldrá de dicho método hasta que elija una opción válida<br/>
+     * @return eleccionCadena la elección que ha dado el usuario en forma numérica
+     */
     public static int imprimirMenuPrincipalEingresarOpcion() {
         String eleccionCadena = null;
         do {
@@ -69,51 +75,87 @@ public class Menu {
         return Integer.parseInt(eleccionCadena);
     }
 
-    public static String ingresarNombreCliente() {
+    /**
+     * <b>Cabecera:</b> public static String obtenerNombreClienteValido()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime un mensaje al usuario diciendo que ingrese un nombre, y hasta que ingrese algún carácter no saldrá, al final, devolverá dicha cadena <br/>
+     * @return String, el nombre formateado dependiendo de la longitud y el formato
+     */
+    public static String obtenerNombreClienteValido() {
         String nombre = null;
         do {
             System.out.println(INGRESO_NOMBRE_CLIENTE);
             nombre = teclado.nextLine();
-        } while (Validaciones.esCampoVacio(nombre));
+        } while (Validaciones.esCadenaVacia(nombre));
         return Utilidades.formatearString(LONGITUD_NOMBRE_CLIENTE, FORMATO_NOMBRE, nombre);
     }
 
-    public static String ingresarApellidosCliente() {
+    /**
+     * <b>Cabecera:</b> public static String obtenerApellidosClienteValido()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime un mensaje al usuario diciendo que ingrese unos apellidos, y hasta que ingrese algún carácter no saldrá, al final, devolverá dicha cadena <br/>
+     * @return String, los apellidos formateados dependiendo de la longitud y el formato
+     */
+    public static String obtenerApellidosClienteValido() {
         String apellidos = null;
         do {
             System.out.println(INGRESO_APELLIDOS_CLIENTE);
             apellidos = teclado.nextLine();
-        } while (Validaciones.esCampoVacio(apellidos));
+        } while (Validaciones.esCadenaVacia(apellidos));
         return Utilidades.formatearString(LONGITUD_APELLIDOS_CLIENTE, FORMATO_APELLIDOS, apellidos);
     }
 
-    public static int ingresarNumerosDNICliente() {
+    /**
+     * <b>Cabecera:</b> public static String obtenerApellidosClienteValido()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime un mensaje al usuario diciendo que ingrese los números del dni, y hasta que ingrese unos datos válidos no saldrá del método, una vez validado los devuelve <br/>
+     * @return int números del dni validados
+     */
+    public static int obtenerNumerosDNIClienteValido() {
         String numerosDNIClienteCadena = null;
         do {
             System.out.println(INGRESO_DNI_CLIENTE);
             numerosDNIClienteCadena = teclado.nextLine();
-        } while (!Validaciones.esNumeroEnRango(numerosDNIClienteCadena, LONGITUD_NUMEROS_DNI));
+        } while (Validaciones.esNumeroEnRango(numerosDNIClienteCadena, LONGITUD_NUMEROS_DNI));
         return Integer.parseInt(numerosDNIClienteCadena);
     }
 
-    public static String ingresarTelefonoCliente() {
+    /**
+     * <b>Cabecera:</b> public static String obtenerTelefonoClienteValido()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime un mensaje al usuario diciendo que ingrese los números de teléfono, y hasta que ingrese unos datos válidos no saldrá del método, una vez validado los devuelve <br/>
+     * @return int números del teléfono validados
+     */
+    public static String obtenerTelefonoClienteValido() {
         String numerosTelefonoClienteCadena = null;
         do {
             System.out.println(INGRESO_TELEFONO_CLIENTE);
             numerosTelefonoClienteCadena = teclado.nextLine();
-        } while (!Validaciones.esNumeroEnRango(numerosTelefonoClienteCadena, LONGITUD_TELEFONO));
+        } while (Validaciones.esNumeroEnRango(numerosTelefonoClienteCadena, LONGITUD_TELEFONO));
         return numerosTelefonoClienteCadena;
     }
 
-    public static String ingresarDireccionCliente() {
+    /**
+     * <b>Cabecera:</b> public static String obtenerDireccionClienteValido()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime un mensaje al usuario diciendo que ingrese una dirección, y hasta que ingrese algún carácter no saldrá, al final, devolverá dicha cadena <br/>
+     * @return String, la dirección formateada dependiendo de la longitud y el formato
+     */
+    public static String obtenerDireccionClienteValido() {
         String direccion = null;
         do {
             System.out.println(INGRESO_DIRECCION_CLIENTE);
             direccion = teclado.nextLine();
-        } while (Validaciones.esCampoVacio(direccion));
+        } while (Validaciones.esCadenaVacia(direccion));
         return Utilidades.formatearString(LONGITUD_DIRECCION_CLIENTE, FORMATO_DIRECCION, direccion);
     }
 
+    /**
+     * <b>Cabecera:</b> public static String imprimirMenuConfiguracionEingresarOpcion()<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Imprime por pantalla el menú de configuración y pide por teclado una elección, no saldrá de dicho método hasta que elija una opción válida<br/>
+     * @return eleccion, la elección que ha dado el usuario en forma de cadena
+     */
     public static String imprimirMenuConfiguracionEingresarOpcion() {
         String eleccion;
         System.out.println(MENU_FICHERO_CONFIGURACION);
@@ -124,15 +166,33 @@ public class Menu {
         return eleccion;
     }
 
-    public static void mostrarCliente(Cliente clienteEncontrado) {
-        System.out.println(clienteEncontrado);
+    /**
+     * <b>Cabecera:</b> public static void imprimirCliente(Cliente cliente)<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Dado un cliente, imprime por pantalla su Cliente.toString()<br/>
+     * @param cliente cliente a  imprimir
+     */
+    public static void imprimirCliente(Cliente cliente) {
+        System.out.println(cliente);
     }
 
-    public static void mostrarMensajeError(String message) {
+    /**
+     * <b>Cabecera:</b> public static void imprimirMensajeError(String message)<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Dado una cadena, la imprime por pantalla en formato de error<br/>
+     * @param message cadena a imprimir
+     */
+    public static void imprimirMensajeError(String message) {
         System.err.println(message);
     }
 
-    public static void mostrarMensaje(String message) {
+    /**
+     * <b>Cabecera:</b> public static void imprimirMensaje(String message)<br/>
+     * <b>Precondiciones:</b> ninguna<br/>
+     * <b>Postcondiciones:</b> Dado una cadena, la imprime por pantalla<br/>
+     * @param message cadena a imprimir
+     */
+    public static void imprimirMensaje(String message) {
         System.out.println(message);
     }
 }

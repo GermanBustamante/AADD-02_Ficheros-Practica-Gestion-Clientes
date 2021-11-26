@@ -6,7 +6,6 @@ import java.io.*;
  * @author germanbustamante_
  * @version 1.0
  */
-
 public class Utilidades {
     //Constantes
     public static final char[] LETRASDNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};

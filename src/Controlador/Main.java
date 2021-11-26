@@ -42,56 +42,64 @@ public class Main {
         } while (!salida);
     }
 
+    //Recoge un cliente con los datos pasados por la clase Menú y luego escribe el cliente completo en el fichero de clientes
+    //y el dni con su correspondiente índice en el fichero de índices
     private static void aniadirCliente(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes) {
-        Cliente cliente = pedirDatosClienteInstanciado();
+        Cliente cliente = obtenerDatosClienteInstanciado();
         try {
             fileAccessCliente.escribirClienteFicheroBinario(cliente);
             fileAccessIndiceClientes.escribirIndiceYDNIFicheroBinario(cliente.getDni());
         } catch (IOException e) {
-            Menu.mostrarMensajeError(e.getMessage());
+            Menu.imprimirMensajeError(e.getMessage());
         }
     }
 
-    private static Cliente pedirDatosClienteInstanciado() {
-        String nombreCliente = Menu.ingresarNombreCliente();
-        String apellidosCliente = Menu.ingresarApellidosCliente();
-        String dniCliente = Utilidades.getDNICompleto(Menu.ingresarNumerosDNICliente());
-        String telefonoCliente = Menu.ingresarTelefonoCliente();
-        String direccionCliente = Menu.ingresarDireccionCliente();
+    //Obtiene los datos del cliente a partir de la clase Menú y retorna un cliente instanciado
+    private static Cliente obtenerDatosClienteInstanciado() {
+        String nombreCliente = Menu.obtenerNombreClienteValido();
+        String apellidosCliente = Menu.obtenerApellidosClienteValido();
+        String dniCliente = Utilidades.getDNICompleto(Menu.obtenerNumerosDNIClienteValido());
+        String telefonoCliente = Menu.obtenerTelefonoClienteValido();
+        String direccionCliente = Menu.obtenerDireccionClienteValido();
         return new Cliente(nombreCliente, apellidosCliente, dniCliente, telefonoCliente, direccionCliente);
     }
 
+    //Dado una busqueda de un cliente en el fichero de índices, consulta y muestra por pantalla un cliente o lo borra del fichero índices,
+    //en caso de no existir o estar vacío algún fichero que deba usar, avisará al usuario y saldrá del método
     private static void consultarOBorrarCliente(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes, boolean esConsulta) {
         if (Utilidades.existeFichero(fileAccessIndiceClientes.getFichero()) && !Utilidades.estaVacioFichero(fileAccessIndiceClientes.getFichero())) {
-            String dniCliente = Utilidades.getDNICompleto(Menu.ingresarNumerosDNICliente());
+            String dniCliente = Utilidades.getDNICompleto(Menu.obtenerNumerosDNIClienteValido());
             int posicionClienteFicheroIndices = 0;
             try {
                 posicionClienteFicheroIndices = fileAccessIndiceClientes.getPosicionClienteFicheroBinario(dniCliente);
                 if (esConsulta) {
                     Cliente clienteRecogido = fileAccessCliente.getClienteFicheroBinario(posicionClienteFicheroIndices);
-                    Menu.mostrarCliente(clienteRecogido);
+                    Menu.imprimirCliente(clienteRecogido);
                 } else {
                     fileAccessIndiceClientes.borrarClienteFicheroBinario(posicionClienteFicheroIndices);
                 }
             } catch (EOFException e) {//Cuando no encuentra el indice a borrar
-                Menu.mostrarMensaje(Menu.MENSAJE_DNI_NO_ENCONTRADO);
+                Menu.imprimirMensaje(Menu.MENSAJE_DNI_NO_ENCONTRADO);
             } catch (IOException e) {
-                Menu.mostrarMensajeError(e.getMessage());
+                Menu.imprimirMensajeError(e.getMessage());
             }
         } else {
-            Menu.mostrarMensajeError(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
+            Menu.imprimirMensajeError(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
         }
     }
 
+    //Escribe un formato en el fichero de configuración
     private static void configurarExportacion(FileAccessConfiguracion fileAccessConfiguracion) {
         try {
             fileAccessConfiguracion.escribirFormatoFicheroConfiguracion(Menu.imprimirMenuConfiguracionEingresarOpcion());
         } catch (IOException e) {
-            Menu.mostrarMensajeError(e.getMessage());
+            Menu.imprimirMensajeError(e.getMessage());
         }
     }
 
     //TODO MODURALIZAR
+    //Recoge una lista de clientes del fichero de clientes y lo escribe en un fichero de texto "clientes.txt" en el formato recogido en el fichero de configuración,
+    //en caso de no existir o estar vacío algún fichero que deba usar, avisará al usuario y saldrá del método
     private static void exportarClientes(FileAccessCliente fileAccessCliente, FileAccessIndiceClientes fileAccessIndiceClientes, FileAccessExportacionClientes fileAccessExportacionClientes, FileAccessConfiguracion fileAccessConfiguracion) {
         List<Cliente> listaClientes = null;
         List<Integer> listaIndicesClientesBorrados = null;
@@ -109,16 +117,16 @@ public class Main {
                         fileAccessExportacionClientes.escribirClientesFicheroTexto(listaClientes, formato);
                     } else if (!(Utilidades.existeFichero(fileAccessConfiguracion.getFichero()) &&
                             !Utilidades.estaVacioFichero(fileAccessConfiguracion.getFichero()))) {//Si la lista de clientes está vacía
-                        Menu.mostrarMensaje(Menu.MENSAJE_FICHERO_CONGFIGURACION_NO_LISTO);
+                        Menu.imprimirMensaje(Menu.MENSAJE_FICHERO_CONGFIGURACION_NO_LISTO);
                     } else {
-                        Menu.mostrarMensaje(Menu.MENSAJE_CLIENTES_NO_CARGADOS);
+                        Menu.imprimirMensaje(Menu.MENSAJE_CLIENTES_NO_CARGADOS);
                     }
                 }
             } catch (IOException e) {
-                Menu.mostrarMensajeError(e.getMessage());
+                Menu.imprimirMensajeError(e.getMessage());
             }
         } else {
-            Menu.mostrarMensajeError(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
+            Menu.imprimirMensajeError(Menu.MENSAJE_FICHERO_INEXISTENTE_VACIO);
         }
     }
 

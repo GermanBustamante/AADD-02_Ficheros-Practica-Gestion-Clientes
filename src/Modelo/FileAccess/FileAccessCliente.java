@@ -17,7 +17,7 @@ public class FileAccessCliente {
     private final File fichero;
 
     //Constantes
-    public static final String RUTA_FICHERO_CLIENTES = "clientes.bin";
+    public static final String RUTA_FICHERO_CLIENTES = ".//Ficheros//clientes.bin";
     public static final String RANDOMACCESSFILE_MODO_LECTURA_ESCRITURA = "rw";
     public static final String RANDOMACCESSFILE_MODO_LECTURA = "r";
     public static final int LONGITUD_NOMBRE_CLIENTE_BYTES = 25;
@@ -122,7 +122,7 @@ public class FileAccessCliente {
         return (int) (fichero.length() / getLongitudBytesCliente());
     }
 
-    //Dado un array de bytes, genera un string dado este, corta la cadena y la devuelve cortada en un array de Strings
+    //Dado un array de bytes, genera un string, corta la cadena y la devuelve cortada en un array de Strings
     private String[] getArrayCadenasDatosCliente(byte[] bytesDatosCliente) {
         String[] arrayCadenasDatosCliente = new String[LONGITUD_ARRAY_CADENAS_DATOS_CLIENTE];
         String cadenaDatosCliente = new String(bytesDatosCliente);

@@ -16,7 +16,7 @@ public class FileAccessIndiceClientes {
     //Constantes
     public static final int LONGITUD_INT_BYTES = 4;
     public static final int LONGITUD_DNI_STRING_BYTES = 9;
-    public static final String RUTA_FICHERO_INDICE_CLIENTES = "indice_clientes.bin";
+    public static final String RUTA_FICHERO_INDICE_CLIENTES = ".//Ficheros//indice_clientes.bin";
 
     //Constructores
     public FileAccessIndiceClientes() {
@@ -115,10 +115,12 @@ public class FileAccessIndiceClientes {
     }
 
     //Metodos privados
+    //Devuelve el numero de clientes de un fichero, teniendo en cuenta que todos los clientes ocupen lo mismo
     private int getNumeroClientes() {
         return (int) (fichero.length() / (getLongitudIndiceYDniBytes()));
     }
 
+    //Devuelve la longitud en bytes de un índice (int) y la longitud de un dni
     private int getLongitudIndiceYDniBytes() {
         return LONGITUD_DNI_STRING_BYTES + LONGITUD_INT_BYTES;
     }

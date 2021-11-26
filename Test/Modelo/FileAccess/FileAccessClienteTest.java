@@ -12,11 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FileAccessClienteTest {
     private static FileAccessCliente fileAccessCliente;
-    public static final String RUTA_FICHERO_CLIENTES_PRUEBA = "clientes_prueba.bin";
+    public static final String RUTA_FICHERO_CLIENTES_PRUEBA = ".//Ficheros//clientes_prueba.bin";
 
     @BeforeAll
     static void instanciarFileAccess() {
         fileAccessCliente = new FileAccessCliente(RUTA_FICHERO_CLIENTES_PRUEBA);
+    }
+
+    @AfterAll
+    static void borrarFicheroPrueba(){
+        fileAccessCliente.getFichero().delete();
     }
 
     //Antes de cada método vaciamos el fichero de clientes de prueba

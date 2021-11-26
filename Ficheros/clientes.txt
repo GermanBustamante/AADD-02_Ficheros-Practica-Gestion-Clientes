@@ -1,0 +1,2 @@
+Nombre --> German	|Apellidos --> BC	|DNI --> 29565541F	Telefono --> 222222222	|Direccion --> Callesimanca
+Nombre --> Pepe	|Apellidos --> Mel	|DNI --> 28711464N	Telefono --> 333333333	|Direccion --> CalleBloste

@@ -23,6 +23,9 @@ public class Cliente {
     private String telefono;
     private String direccion;
 
+    //Constantes
+
+
     //Getters
     public String getNombre() {
         return nombre;
@@ -50,7 +53,6 @@ public class Cliente {
     }
 
     //Métodos sobreescritos
-    //TODO HABER SI LE GUSTA
     @Override
     public String toString() {
         return String.valueOf(new StringBuilder().append("Nombre --> ").append(nombre.replace(" ", "")).append(

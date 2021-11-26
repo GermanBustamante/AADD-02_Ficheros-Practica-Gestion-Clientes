@@ -14,7 +14,7 @@ public class FileAccessExportacionClientes {
     private final File fichero;
 
     //Constantes
-    public static final String RUTA_FICHERO_CLIENTES_TEXTO = "clientes.txt";
+    public static final String RUTA_FICHERO_CLIENTES_TEXTO = ".//Ficheros//clientes.txt";
 
     //Constructores
     public FileAccessExportacionClientes() {
