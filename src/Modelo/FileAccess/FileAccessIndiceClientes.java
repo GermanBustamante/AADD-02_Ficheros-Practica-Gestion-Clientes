@@ -16,6 +16,7 @@ public class FileAccessIndiceClientes {
     //Constantes
     public static final int LONGITUD_INT_BYTES = 4;
     public static final int LONGITUD_DNI_STRING_BYTES = 9;
+    public static final int SEMAFORO_DNI_NO_VALIDO = -1;
     public static final String RUTA_FICHERO_INDICE_CLIENTES = ".//Ficheros//indice_clientes.bin";
 
     //Constructores
@@ -42,7 +43,7 @@ public class FileAccessIndiceClientes {
     public void escribirIndiceYDNIFicheroBinario(String dniCliente) throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(fichero, true);
              DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)) {
-            dataOutputStream.writeInt(getNumeroClientes() + 1);//TODO NUMERO MAGICO
+            dataOutputStream.writeInt(getNumeroClientes());
             dataOutputStream.writeBytes(dniCliente);
         }
     }
@@ -62,7 +63,7 @@ public class FileAccessIndiceClientes {
              DataInputStream dataInputStream = new DataInputStream(fileInputStream)) {
             while (!dniEncontrado) {
                 indiceCliente = dataInputStream.readInt();
-                if (indiceCliente != -1) {
+                if (indiceCliente != SEMAFORO_DNI_NO_VALIDO) {
                     if (new String(dataInputStream.readNBytes(LONGITUD_DNI_STRING_BYTES)).equals(dniCliente)){
                         dniEncontrado = true;
                     }
@@ -71,7 +72,7 @@ public class FileAccessIndiceClientes {
                 }
             }
         }
-        return indiceCliente;
+        return indiceCliente-1;
     }
 
     /**
@@ -84,7 +85,7 @@ public class FileAccessIndiceClientes {
     public void borrarClienteFicheroBinario(int posicionClienteFicheroIndices) throws IOException {
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(fichero, FileAccessCliente.RANDOMACCESSFILE_MODO_LECTURA_ESCRITURA)) {
             randomAccessFile.seek((long) (posicionClienteFicheroIndices - 1) * getLongitudIndiceYDniBytes());
-            randomAccessFile.writeInt(-1);
+            randomAccessFile.writeInt(SEMAFORO_DNI_NO_VALIDO);
         }
     }
 
@@ -102,9 +103,9 @@ public class FileAccessIndiceClientes {
         int contador = 1;
         try (FileInputStream fileInputStream = new FileInputStream(fichero);
              DataInputStream dataInputStream = new DataInputStream(fileInputStream)) {
-            while (contador != getNumeroClientes() + 1) {
+            while (contador != getNumeroClientes()) {
                 indiceCliente = dataInputStream.readInt();
-                if (indiceCliente == -1) {
+                if (indiceCliente == SEMAFORO_DNI_NO_VALIDO) {
                     listaIndicesClientesBorrados.add(contador);
                 }
                 dataInputStream.skipBytes(LONGITUD_DNI_STRING_BYTES);
@@ -117,7 +118,7 @@ public class FileAccessIndiceClientes {
     //Metodos privados
     //Devuelve el numero de clientes de un fichero, teniendo en cuenta que todos los clientes ocupen lo mismo
     private int getNumeroClientes() {
-        return (int) (fichero.length() / (getLongitudIndiceYDniBytes()));
+        return (int) (fichero.length() / (getLongitudIndiceYDniBytes())+1);
     }
 
     //Devuelve la longitud en bytes de un índice (int) y la longitud de un dni

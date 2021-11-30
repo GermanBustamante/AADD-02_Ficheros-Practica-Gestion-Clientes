@@ -9,7 +9,7 @@ import java.io.*;
 public class Utilidades {
     //Constantes
     public static final char[] LETRASDNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
-    public static final int NUMERO_SUBSTRING = 0; //TODO MEJORAR NOMBRE
+    public static final int NUMERO_FORMATEO_SUBSTRING = 0;
     public static final String CADENA_VACIA = "";
 
     /**
@@ -22,7 +22,7 @@ public class Utilidades {
      * */
     public static String getDNICompleto(int numerosDNICliente) {
         char letra;
-        letra = LETRASDNI[numerosDNICliente % 23];
+        letra = LETRASDNI[numerosDNICliente % LETRASDNI.length];
         return new StringBuilder().append(numerosDNICliente).append(letra).toString();
     }
 
@@ -36,7 +36,7 @@ public class Utilidades {
      * @return String cadena formateada
      * */
     public static String formatearString(int longitudCadena, String formatoCadena, String cadenaAFormatear) {
-        return (cadenaAFormatear.length() < longitudCadena) ? String.format(formatoCadena, cadenaAFormatear) : cadenaAFormatear.substring(NUMERO_SUBSTRING, longitudCadena);
+        return (cadenaAFormatear.length() < longitudCadena) ? String.format(formatoCadena, cadenaAFormatear) : cadenaAFormatear.substring(NUMERO_FORMATEO_SUBSTRING, longitudCadena);
     }
 
     /**

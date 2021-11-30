@@ -76,7 +76,7 @@ public class FileAccessCliente {
         List<Cliente> listaClientesRecogida = new ArrayList<>();
         try (FileInputStream fileInputStream = new FileInputStream(fichero);
              DataInputStream dataInputStream = new DataInputStream(fileInputStream)) {
-            while (contadorIndice != (getNumeroClientes() + 1)) {//TODO NUMERO MAGICO
+            while (contadorIndice != (getNumeroClientes())) {
                 if (!listaIndicesClientesBorrados.contains(contadorIndice)) {
                     String[] arrayCadenasDatosCliente = getArrayCadenasDatosCliente(dataInputStream.readNBytes(getLongitudBytesCliente()));
                     listaClientesRecogida.add(new Cliente(arrayCadenasDatosCliente[0], arrayCadenasDatosCliente[1], arrayCadenasDatosCliente[2], arrayCadenasDatosCliente[3], arrayCadenasDatosCliente[4]));
@@ -103,7 +103,7 @@ public class FileAccessCliente {
         Cliente clienteRecogido = null;
         byte[] bytesDatosCliente = new byte[getLongitudBytesCliente()];
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(fichero, RANDOMACCESSFILE_MODO_LECTURA)) {
-            randomAccessFile.seek((long) (posicionClienteFicheroIndices - 1) * getLongitudBytesCliente());//TODO NUMERO MAGICO
+            randomAccessFile.seek((long) (posicionClienteFicheroIndices) * getLongitudBytesCliente());
             randomAccessFile.readFully(bytesDatosCliente);
             String[] arrayCadenasDatosCliente = getArrayCadenasDatosCliente(bytesDatosCliente);
             clienteRecogido = new Cliente(arrayCadenasDatosCliente[0], arrayCadenasDatosCliente[1], arrayCadenasDatosCliente[2], arrayCadenasDatosCliente[3], arrayCadenasDatosCliente[4]);
@@ -119,7 +119,7 @@ public class FileAccessCliente {
 
     //Devuelve el numero de clientes que tiene el fichero
     private int getNumeroClientes() {
-        return (int) (fichero.length() / getLongitudBytesCliente());
+        return (int) (fichero.length() / getLongitudBytesCliente()+1);
     }
 
     //Dado un array de bytes, genera un string, corta la cadena y la devuelve cortada en un array de Strings

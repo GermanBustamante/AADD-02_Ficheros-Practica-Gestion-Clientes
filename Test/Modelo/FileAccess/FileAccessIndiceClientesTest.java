@@ -40,7 +40,7 @@ class FileAccessIndiceClientesTest {
     void TestCasoValidoEscribirIndiceYDNIFicheroIndiceClientesYGetPosicionClienteFicheroIndices() {
         try {
             fileAccessIndiceClientes.escribirIndiceYDNIFicheroBinario(DNI_PRUEBA);
-            assertEquals(1, fileAccessIndiceClientes.getPosicionClienteFicheroBinario(DNI_PRUEBA));
+            assertEquals(0, fileAccessIndiceClientes.getPosicionClienteFicheroBinario(DNI_PRUEBA));
         } catch (IOException e) {
             e.printStackTrace();
         }
