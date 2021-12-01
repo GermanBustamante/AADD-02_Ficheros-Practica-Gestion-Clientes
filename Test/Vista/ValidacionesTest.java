@@ -9,31 +9,33 @@ class ValidacionesTest {
     public static final String CADENA_INUTIL = "Soy una cadena inutil";
     public static final String CADENA_VACIA = "";
     public static final String CADENA_ESPACIOS_BLANCO= "     ";
-
-    @Test
-    void testCasoValidoEsEntero() {
-        assertFalse(Validaciones.esEntero("X"));
-        assertThrows(NullPointerException.class, () -> Validaciones.esEntero(null));
-        assertFalse(Validaciones.esEntero("3.2"));
-    }
+    public static final String CADENA_NUMERICA_DECIMAL = "3.2";
+    public static final String CADENA_NUMERICA_ENTERO = "3";
 
     @Test
     void testCasoNoValidoEsEntero() {
+        assertFalse(Validaciones.esEntero(CADENA_INUTIL));
+        assertThrows(NullPointerException.class, () -> Validaciones.esEntero(null));
+        assertFalse(Validaciones.esEntero(CADENA_NUMERICA_DECIMAL));
+    }
+
+    @Test
+    void testCasoValidoEsEntero() {
         assertTrue(Validaciones.esEntero("3"));
     }
 
     @Test
-    void testCasoValidoEsNumeroEnRango() {
-        assertFalse(Validaciones.esNumeroEnRango("X", 0, 0));
+    void testCasoNoValidoEsNumeroEnRango() {
+        assertFalse(Validaciones.esNumeroEnRango(CADENA_INUTIL, 0, 0));
         assertThrows(NullPointerException.class, () ->Validaciones.esNumeroEnRango(null, 0, 0));
-        assertFalse(Validaciones.esNumeroEnRango("3", 0, 2));
-        assertTrue(Validaciones.esNumeroEnRango("3", 2));
+        assertFalse(Validaciones.esNumeroEnRango(CADENA_NUMERICA_ENTERO, 0, 2));
+        assertTrue(Validaciones.esNumeroEnRango(CADENA_NUMERICA_ENTERO, 2));
     }
 
     @Test
-    void testEsNumeroEnRango() {
-        assertTrue(Validaciones.esNumeroEnRango("3", 1, 8));
-        assertFalse(Validaciones.esNumeroEnRango("3", 1));
+    void testCasoValidoEsNumeroEnRango() {
+        assertTrue(Validaciones.esNumeroEnRango(CADENA_NUMERICA_ENTERO, 1, 8));
+        assertFalse(Validaciones.esNumeroEnRango(CADENA_NUMERICA_ENTERO, 1));
     }
 
     @Test

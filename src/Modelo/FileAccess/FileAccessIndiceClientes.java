@@ -84,7 +84,9 @@ public class FileAccessIndiceClientes {
      */
     public void borrarClienteFicheroBinario(int posicionClienteFicheroIndices) throws IOException {
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(fichero, FileAccessCliente.RANDOMACCESSFILE_MODO_LECTURA_ESCRITURA)) {
-            randomAccessFile.seek((long) (posicionClienteFicheroIndices - 1) * getLongitudIndiceYDniBytes());
+            if(posicionClienteFicheroIndices != 1){
+                randomAccessFile.seek((long) (posicionClienteFicheroIndices) * getLongitudIndiceYDniBytes());
+            }
             randomAccessFile.writeInt(SEMAFORO_DNI_NO_VALIDO);
         }
     }
